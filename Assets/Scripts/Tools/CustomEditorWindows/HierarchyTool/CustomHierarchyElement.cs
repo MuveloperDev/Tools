@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+#if UNITY_EDITOR
 using UnityEngine;
 
 public class CustomHierarchyElement : MonoBehaviour, ICustomHierarchyElement
@@ -16,3 +15,4 @@ public class CustomHierarchyElement : MonoBehaviour, ICustomHierarchyElement
         return InStyle;
     }
 }
+#endif
