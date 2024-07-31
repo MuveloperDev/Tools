@@ -52,22 +52,22 @@ public class GenerateFigure_LineRenderer : MonoBehaviour
         lineRenderer.positionCount = SEGMENTS + 2; // 중심점 + 각도 분할 + 마지막 점 (중심점과 연결)
 
         // 정점
-        vertices = new Vector3[SEGMENTS + 1];
+        vertices = new Vector3[SEGMENTS + 2];
 
         // 중심점
         vertices[0] = Vector3.zero;
 
         // 원의 각 점 계산
-        for (int i = 0; i < SEGMENTS; i++)
+        for (int i = 0; i <= SEGMENTS; i++)
         {
             // 원의 각 점의 각도입니다. i가 증가함에 따라 angle도 0에서 2π까지 증가
             float angle = (float)i / SEGMENTS * 2 * Mathf.PI;
             // 삼각함수 sin을 사용하여 x좌표를 계산
             float x = Mathf.Sin(angle) * radius;
             float z = Mathf.Cos(angle) * radius;
-            vertices[i + 1] = new Vector3(x, 0, z);
+            vertices[i + 1] = new Vector3(x, 1, z);
         }
-
+        vertices[vertices.Length - 1] = vertices[1];
         lineRenderer.SetPositions(vertices);
     }
 
@@ -82,7 +82,7 @@ public class GenerateFigure_LineRenderer : MonoBehaviour
         vertices[0] = playerTr.position;
 
 
-        for (int i = 0; i < SEGMENTS; i++)
+        for (int i = 0; i <= SEGMENTS; i++)
         {
             // 부채꼴 각 점의 각도입니다. i가 증가함에 따라 angle도 0에서 2π까지 증가
             float angle = (float)i / SEGMENTS * (degree / 180) * Mathf.PI;
@@ -92,7 +92,7 @@ public class GenerateFigure_LineRenderer : MonoBehaviour
             vertices[i + 1] = new Vector3(playerTr.position.x + x, playerTr.position.y, playerTr.position.z + z);
         }
 
-        vertices[SEGMENTS + 1] = vertices[0];
+        //vertices[SEGMENTS + 1] = vertices[1];
         lineRenderer.SetPositions(vertices);
     }
 }
